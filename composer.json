@@ -4,7 +4,10 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.0.*"
+		"laravel/framework": "4.0.*",
+		"bshaffer/oauth2-server-php": "dev-develop",
+		"predis/predis": "0.8.x-dev",
+		"zetacomponents/database": "1.4.6"
 	},
 	"autoload": {
 		"classmap": [

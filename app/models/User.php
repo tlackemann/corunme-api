@@ -3,7 +3,7 @@
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+class User extends Eloquent implements UserInterface, RemindableInterface{
 
 	/**
 	 * The database table used by the model.
@@ -18,6 +18,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var array
 	 */
 	protected $hidden = array('password');
+
+	/**
+	 * Fillable attributes - prevent mass-assignment	
+	 *
+	 * @var array
+	 */
+	protected $fillable = array('id', 'role_id');
 
 	/**
 	 * Get the unique identifier for the user.
@@ -47,6 +54,47 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function getReminderEmail()
 	{
 		return $this->email;
+	}
+
+	/**
+	 * Role - One to one
+	 *
+	 * @return
+	 */
+	public function role()
+	{
+		return $this->belongsTo('Role');
+	}
+
+	/**
+	 * Runs
+	 *
+	 * @return
+	 */
+	public function runs()
+	{
+		return $this->hasMany('Run');
+	}
+
+	// /**
+	//  * OAuth Client IDs
+	//  *
+	//  * @return
+	//  */
+	// public function oauthClients()
+	// {
+	// 	$clients = DB::table('user_oauth_clients')->where('user_id', $this->id)->lists('oauth_client_id');
+	// 	return $clients;
+	// }
+
+	/**
+	 * Logins
+	 *
+	 * @return
+	 */
+	public function logins()
+	{
+		return $this->hasMany('Login');
 	}
 
 }

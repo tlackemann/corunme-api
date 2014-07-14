@@ -15,3 +15,31 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+
+// User routes
+// Route::post('user', 'UserController@indexAction');
+// Route::post('user/edit/', 'UserController@indexAction');
+// Route::post('user', 'UserController@indexAction');
+// Route::post('user', 'UserController@indexAction');
+
+Route::resource('user', 'UserController');
+
+Route::resource('run', 'RunController');
+
+Route::get('login', 'UserController@login');
+Route::post('login', 'UserController@login');
+Route::post('logout', 'UserController@logout');
+
+
+Route::get('oauth', 'OauthController@action_index');
+Route::post('oauth/login', 'OauthController@login');
+
+/**
+ * OAuth Routes
+ */
+Route::get('oauth', 'OauthController@index');
+Route::post('oauth/token', 'OauthController@token');
+
+Event::listen('illuminate.query', function() {
+    #print_r(func_get_args());
+});
